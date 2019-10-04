@@ -15,10 +15,10 @@
 # limitations under the License.
 #
 
-DEVICE_PATH := device/xiaomi/santoni
+DEVICE_PATH := device/huawei/diego
 
 # inherit from common msm8937-common
--include device/xiaomi/msm8937-common/BoardConfigCommon.mk
+-include device/huawei/msm8937-common/BoardConfigCommon.mk
 
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
@@ -28,19 +28,19 @@ TARGET_USES_QTI_CAMERA_DEVICE := true
 TARGET_TS_MAKEUP := true
 
 # Kernel
-TARGET_KERNEL_CONFIG := santoni_defconfig
+TARGET_KERNEL_CONFIG := diego_defconfig
 
 # Init
-TARGET_INIT_VENDOR_LIB         := libinit_santoni
+TARGET_INIT_VENDOR_LIB         := libinit_diego
 TARGET_PLATFORM_DEVICE_BASE    := /devices/soc/
-TARGET_RECOVERY_DEVICE_MODULES := libinit_santoni
+TARGET_RECOVERY_DEVICE_MODULES := libinit_diego
 
 # Security patch level
-VENDOR_SECURITY_PATCH := 2018-10-01
+VENDOR_SECURITY_PATCH := 2018-08-01
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \
     $(DEVICE_PATH)/sepolicy
 
 # Inherit the proprietary files
-include vendor/xiaomi/santoni/BoardConfigVendor.mk
+include vendor/huawei/diego/BoardConfigVendor.mk

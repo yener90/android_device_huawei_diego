@@ -25,9 +25,9 @@ LOCAL_C_INCLUDES := \
 
 LOCAL_CFLAGS := -Wall
 
-LOCAL_MODULE := libinit_santoni
+LOCAL_MODULE := libinit_diego
 LOCAL_MODULE_TAGS := optional
-LOCAL_SRC_FILES := init_santoni.cpp
+LOCAL_SRC_FILES := init_diego.cpp
 
 LOCAL_STATIC_LIBRARIES := libbase
 
