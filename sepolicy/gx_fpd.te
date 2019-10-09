@@ -1,1 +1,0 @@
-allow gx_fpd mnt_user_file:dir search;
