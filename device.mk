@@ -26,13 +26,24 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
+    android.hardware.camera.provider@2.4-impl \
+    android.hardware.camera.provider@2.4-service \
+    camera.device@3.2-impl \
     camera.msm8937 \
-    libmm-qcamera
+    libmm-qcamera \
+    libshim_camera \
+    Snap \
+    vendor.qti.hardware.camera.device@1.0 \
+    vendor.qti.hardware.camera.device@1.0_vendor
+
+# Compatibility
+PRODUCT_PACKAGES += \
+    libshim_cutils \
+    get_offsets
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.1-service.custom \
-    fingerprint.msm8937
+    android.hardware.biometrics.fingerprint@1.0-service.diego
 
 # Init scripts
 PRODUCT_PACKAGES += \
@@ -45,6 +56,11 @@ PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/keylayout/gf3208.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/gf3208.kl \
     $(DEVICE_PATH)/keylayout/msm8920-sku7-snd-card_Button_Jack.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/msm8920-sku7-snd-card_Button_Jack.kl \
     $(DEVICE_PATH)/keylayout/uinput-fpc.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/uinput-fpc.kl
+
+# Libshims
+PRODUCT_PACKAGES += \
+    libshim_mutexdestroy \
+    libshim_pthreadts
 
 # Inherit proprietary files
 $(call inherit-product, vendor/huawei/diego/diego-vendor.mk)
