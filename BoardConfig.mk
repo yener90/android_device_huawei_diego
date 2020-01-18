@@ -25,7 +25,7 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 BOARD_QTI_CAMERA_32BIT_ONLY := true
 TARGET_USES_MEDIA_EXTENSIONS := true
 TARGET_USES_QTI_CAMERA_DEVICE := true
-TARGET_TS_MAKEUP := true
+# TARGET_TS_MAKEUP := true
 
 # Kernel
 TARGET_KERNEL_CONFIG := diego_defconfig
@@ -41,6 +41,13 @@ VENDOR_SECURITY_PATCH := 2018-08-01
 # SELinux
 BOARD_SEPOLICY_DIRS += \
     $(DEVICE_PATH)/sepolicy
+SELINUX_IGNORE_NEVERALLOWS := true
+
+# Shims
+TARGET_LD_SHIM_LIBS := \
+    /system/vendor/lib/libhwlog.so|libshim_cutils.so \
+    /system/vendor/lib64/libhwlog.so|libshim_cutils.so \
+    /system/vendor/lib/libmmcamera_ppeiscore.so|/system/lib/libshim_camera.so
 
 # Inherit the proprietary files
 include vendor/huawei/diego/BoardConfigVendor.mk
