@@ -38,7 +38,7 @@ LOCAL_32_BIT_ONLY := $(BOARD_QTI_CAMERA_32BIT_ONLY)
 LOCAL_MODULE           := mm-jpeg-interface-test
 LOCAL_VENDOR_MODULE := true
 LOCAL_PRELINK_MODULE   := false
-LOCAL_SHARED_LIBRARIES := libcutils libdl libmmjpeg_interface
+LOCAL_SHARED_LIBRARIES := libcutils libdl libmmjpeg_interface liblog
 
 include $(BUILD_EXECUTABLE)
 
@@ -82,7 +82,7 @@ LOCAL_32_BIT_ONLY := $(BOARD_QTI_CAMERA_32BIT_ONLY)
 LOCAL_MODULE           := mm-jpegdec-interface-test
 LOCAL_VENDOR_MODULE := true
 LOCAL_PRELINK_MODULE   := false
-LOCAL_SHARED_LIBRARIES := libcutils libdl libmmjpeg_interface
+LOCAL_SHARED_LIBRARIES := libcutils libdl libmmjpeg_interface liblog
 
 include $(BUILD_EXECUTABLE)
 

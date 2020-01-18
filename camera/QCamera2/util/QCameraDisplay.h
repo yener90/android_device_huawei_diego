@@ -58,7 +58,7 @@ using ::android::sp;
 
 namespace qcamera {
 
-#define CAMERA_NUM_VSYNC_INTERVAL_HISTORY  8
+#define CAMERA_NUM_VSYNC_INTERVAL_HISTORY  6
 #define NSEC_PER_MSEC 1000000LLU
 
 class QCameraDisplay {

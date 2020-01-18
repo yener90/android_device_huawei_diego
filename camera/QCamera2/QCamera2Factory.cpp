@@ -76,6 +76,7 @@ volatile uint32_t gKpiDebugLevel = 1;
  *==========================================================================*/
 QCamera2Factory::QCamera2Factory()
 {
+    camera_info info;
     mHalDescriptors = NULL;
     mCallbacks = NULL;
     mNumOfCameras = get_num_of_cameras();
@@ -127,6 +128,10 @@ QCamera2Factory::QCamera2Factory()
                     mHalDescriptors[i].device_version =
                             CAMERA_DEVICE_API_VERSION_1_0;
                 }
+                //Query camera at this point in order
+                //to avoid any delays during subsequent
+                //calls to 'getCameraInfo()'
+                getCameraInfo(i, &info);
             }
         } else {
             LOGE("Not enough resources to allocate HAL descriptor table!");

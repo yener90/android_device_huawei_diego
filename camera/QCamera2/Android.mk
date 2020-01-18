@@ -4,9 +4,6 @@ LOCAL_PATH:= $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_COPY_HEADERS_TO := qcom/camera
-LOCAL_COPY_HEADERS := QCameraFormat.h
-
 LOCAL_SRC_FILES := \
         util/QCameraBufferMaps.cpp \
         util/QCameraCmdThread.cpp \
@@ -14,7 +11,6 @@ LOCAL_SRC_FILES := \
         util/QCameraPerf.cpp \
         util/QCameraQueue.cpp \
         util/QCameraDisplay.cpp \
-        util/QCameraCommon.cpp \
         QCamera2Hal.cpp \
         QCamera2Factory.cpp
 
@@ -55,21 +51,10 @@ endif
 LOCAL_CFLAGS += -DSYSTEM_HEADER_PREFIX=sys
 
 # Kernel headers
-LOCAL_CFLAGS += -DCONFIG_MACH_HUAWEI_MSM8937 -DCONFIG_MACH_HUAWEI_DIEGO
+LOCAL_CFLAGS += -DCONFIG_MACH_HUAWEI_MSM8940 -DCONFIG_MACH_HUAWEI_DIEGO
 
 LOCAL_CFLAGS += -DHAS_MULTIMEDIA_HINTS -D_ANDROID
 
-ifeq ($(TARGET_KERNEL_VERSION), 4.9)
-LOCAL_CFLAGS += -DNO_CDS_MODE
-endif
-
-ifeq ($(TARGET_USES_AOSP),true)
-LOCAL_CFLAGS += -DVANILLA_HAL
-endif
-
-ifeq (1,$(filter 1,$(shell echo "$$(( $(PLATFORM_SDK_VERSION) <= 23 ))" )))
-LOCAL_CFLAGS += -DUSE_HAL_3_3
-endif
 
 #use media extension
 ifeq ($(TARGET_USES_MEDIA_EXTENSIONS), true)
@@ -105,21 +90,19 @@ LOCAL_C_INCLUDES := \
 
 #HAL 1.0 Include paths
 LOCAL_C_INCLUDES += \
-        $(LOCAL_PATH)/HAL
+        $(call project-path-for,qcom-camera)/QCamera2/HAL
 
-ifeq ($(TARGET_COMPILE_WITH_MSM_KERNEL),true)
 LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
 LOCAL_ADDITIONAL_DEPENDENCIES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
-endif
 ifeq ($(TARGET_TS_MAKEUP),true)
 LOCAL_CFLAGS += -DTARGET_TS_MAKEUP
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/HAL/tsMakeuplib/include
 endif
-ifneq (,$(filter msm8974 msm8916 msm8226 msm8610 msm8916 apq8084 msm8084 msm8994 msm8992 msm8952 msm8937 msm8953 msm8996 msmcobalt msmfalcon, $(TARGET_BOARD_PLATFORM)))
+ifneq (,$(filter msm8974 msm8916 msm8226 msm8610 msm8916 apq8084 msm8084 msm8994 msm8992 msm8952 msm8937 titanium msm8996,$(TARGET_BOARD_PLATFORM)))
     LOCAL_CFLAGS += -DVENUS_PRESENT
 endif
 
-ifneq (,$(filter msm8996 msmcobalt msmfalcon,$(TARGET_BOARD_PLATFORM)))
+ifneq (,$(filter msm8996,$(TARGET_BOARD_PLATFORM)))
     LOCAL_CFLAGS += -DUBWC_PRESENT
 endif
 
@@ -132,7 +115,6 @@ LOCAL_C_INCLUDES += \
 LOCAL_SHARED_LIBRARIES := liblog libhardware libutils libcutils libdl libsync
 LOCAL_SHARED_LIBRARIES += libmmcamera_interface libmmjpeg_interface libui libcamera_metadata
 LOCAL_SHARED_LIBRARIES += libqdMetaData libqservice libbinder
-LOCAL_SHARED_LIBRARIES += libcutils libdl
 LOCAL_SHARED_LIBRARIES += libhidlbase libhwbinder
 LOCAL_SHARED_LIBRARIES += android.hardware.power@1.1
 ifeq ($(USE_DISPLAY_SERVICE),true)
