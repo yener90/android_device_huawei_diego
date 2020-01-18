@@ -27,7 +27,7 @@ $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 $(call inherit-product, device/huawei/diego/device.mk)
 
 PRODUCT_BRAND := Huawei
-PRODUCT_MODEL := Honor 6C
+PRODUCT_MODEL := DIG-L21HN
 PRODUCT_DEVICE := diego
 PRODUCT_MANUFACTURER := Huawei
 PRODUCT_NAME := lineage_diego
@@ -37,6 +37,6 @@ PRODUCT_GMS_CLIENTID_BASE := android-huawei
 TARGET_VENDOR_PRODUCT_NAME := diego
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="diego-user 7.1.2 N2G47H V9.5.10.0.NAMMIFD release-keys"
+    PRIVATE_BUILD_DESC="DIG-L21HN-user 6.0 MRA58X C432B127 release-keys"
 
-BUILD_FINGERPRINT := Huawei/diego/diego:7.1.2/N2G47H/V9.5.10.0.NAMMIFD:user/release-keys
+BUILD_FINGERPRINT := HUAWEI/DIG-L21HN/HWDIG-L8940:6.0/HUAWEIDIG-L21HN/C432B127:user/release-keys
