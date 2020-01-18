@@ -24,13 +24,27 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+on boot
+#add for fingerprint
+    chmod 0660 /dev/fingerprint
+    chown system system /dev/fingerprint
+    chmod 0660 /sys/devices/platform/fingerprint/irq
+    chown system system /sys/devices/platform/fingerprint/irq
+    chmod 0660 /sys/devices/platform/fingerprint/result
+    chown system system /sys/devices/platform/fingerprint/result
+    chown system system /sys/devices/platform/fingerprint/fingerprint_chip_info
+    chmod 0660 /sys/devices/platform/fingerprint/read_image_flag
+    chown system system /sys/devices/platform/fingerprint/read_image_flag
+
+on init
+    export LD_PRELOAD libshim_cutils.so
 
 service baseband-sh /vendor/bin/init.baseband.sh
     class late_start
     user root
     oneshot
 
-service goodix_script /vendor/bin/init.goodix.sh
-    class late_start
+service teecd /vendor/bin/teecd
+    class core
     user root
-    oneshot
+    writepid /dev/cpuset/system-background/tasks
